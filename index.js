@@ -12,21 +12,27 @@ app.listen(3000, () =>{
 })
 
 app.get('/', (req, res) =>{
-    res.sendFile(path.resolve(__dirname, 'index.html'))
+    res.render('index')
     
 })
 
-app.get('/', (req, res) =>{
-    res.sendFile(path.resolve(__dirname, 'about.html'))
+app.get('/about', (req, res) =>{
+    res.render('about')
     
 })
 
-app.get('/', (req, res) =>{
-    res.sendFile(path.resolve(__dirname, 'contact.html'))
+app.get('/contact', (req, res) =>{
+    res.render('contact')
     
 })
 
-app.get('/', (req, res) =>{
-    res.sendFile(path.resolve(__dirname, 'notfound.html'))
+app.get('/post', (req, res) =>{
+    res.render('post')
     
 })
+
+// app.get('/notfound', (req, res) =>{
+//     res.render('notfound')
+    
+// })
+
