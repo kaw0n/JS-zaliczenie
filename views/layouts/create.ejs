@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/header') -%>
+<body>
+    <%- include('layouts/header') -%>
+
+        <div class="container-main card p-5 mt-3 mb-5 ">
+                <h1 class="display-4 mb-5">Create a Post</h1>
+
+            <form class="mt-3"action="/posts/store" method="POST" enctype="multipart/form-data">
+                <!-- Name input-->
+                <div class="form-outline mb-4">
+                    <input type="text" required name="title" id="title" class="form-control"/>
+                    <label class="form-label" for="title">Post Title</label>
+                </div> 
+                
+                <!-- Name input-->
+                <div class="form-outline mb-4">
+                    <input type="email" required name="email" id="email" class="form-control"/>
+                    <label class="form-label" for="title">Email</label>
+                </div>
+                
+                <!-- Name input-->
+                <div class="form-outline mb-4">
+                    <input type="text" required name="username" id="username" class="form-control"/>
+                    <label class="form-label" for="title">UserName</label>
+                </div> 
+
+                <!--Image-->
+                <div class="form-outline mb-4">
+                    Choose An Image
+                    <input type="file" required name="image" id="image" accept=".jpg, .jpeg, . " class="form-control"/>
+                </div>
+
+                <!--Message input-->
+                <div class="form-outline mb-4">
+                    <textarea class="form-control" spellcheck="true" maxlength="315" required name="body" id="body"></textarea>
+                </div>
+
+                <script>
+                    $('#boay').summernote({
+                        plaseholder: "Your message goes here",
+                        tabsize: 2,
+                        height: 200
+                    });
+                </script>
+
+                <!--Submit button-->
+                <button type="submit" class="btn btn-primary btn-block" mb-4>Send</button>
+                </form>
+        </div>
+        <%- include('layouts/footer') -%>
+
+</body>
+<!--MDB-->
+<%- include('layouts/scripts') -%>
+</html>

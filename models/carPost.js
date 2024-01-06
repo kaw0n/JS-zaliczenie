@@ -7,4 +7,6 @@ const carPostSchema = new Schema({
     description: String
 })
 
-module.exports = mongoose.model("carPost", carPostSchema)
+const carPost= mongoose.model("carPost", carPostSchema)
+//module.exports = mongoose.model("carPost", carPostSchema)
+module.exports = carPost;

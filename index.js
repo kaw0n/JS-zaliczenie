@@ -51,17 +51,24 @@ app.get('/contact', (req, res) =>{
     
 })
 
-app.get('/post', (req, res) =>{
-    res.render('post')
+app.get('/posts', (req, res) =>{
+    res.render('posts')
     
+})
+
+app.get('/blogs', async (req, res) =>{
+    const carposts = await carPost.find({})
+    res.render('blogs',{
+        carposts
+    })
 })
 
 app.get('/posts/new', (req, res)=>{
     res.render('create')
 })
 app.get('/posts/store', (req, res)=>{
-    carPost.create(req.body, (error, carpost)=>{
-        res.render('/posts')
+    carPost.create(req.body, (error, carPost)=>{
+        res.render('/blogs')
     })
     
 })
