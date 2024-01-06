@@ -80,7 +80,7 @@ app.get('/posts/new', (req, res)=>{
 //    
 //})
 
-app.get('/post/store', async (req, res) => {
+app.post('/posts/store', async (req, res) => {
     try {
         // Assuming req.body contains the necessary fields for your BlogPost model
         const newBlogPost = new BlogPost(req.body);
@@ -89,13 +89,14 @@ app.get('/post/store', async (req, res) => {
         await newBlogPost.save();
 
         // Redirect to the blogs page after successful creation
-        res.redirect('/blogs');
+        res.redirect('/post'); // Assuming '/posts' is the correct route for displaying all posts
     } catch (error) {
         // Handle any errors that occur during the process
         console.error('Error creating blog post:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 // app.get('/notfound', (req, res) =>{

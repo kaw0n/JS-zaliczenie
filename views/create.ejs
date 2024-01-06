@@ -2,28 +2,28 @@
 <html lang="en">
     <%- include('layouts/header') -%>
 <body>
-    <%- include('layouts/header') -%>
+    <%- include('layouts/navbar') -%>
 
         <div class="container-main card p-5 mt-3 mb-5 ">
                 <h1 class="display-4 mb-5">Create a Post</h1>
 
             <form class="mt-3"action="/posts/store" method="POST" enctype="multipart/form-data">
-                <!-- Name input-->
+                <!-- model input-->
                 <div class="form-outline mb-4">
                     <input type="text" required name="model" id="title" class="form-control"/>
-                    <label class="form-label" for="title">Post Title</label>
+                    <label class="form-label" for="title">Model name</label>
                 </div> 
                 
-                <!-- Name input-->
+                <!-- rok produkcja input-->
                 <div class="form-outline mb-4">
-                    <input type="email" required name="productionYear" id="email" class="form-control"/>
-                    <label class="form-label" for="title">Email</label>
+                    <input type="text" required name="productionYear" id="year" class="form-control"/>
+                    <label class="form-label" for="year">rok produkcji</label>
                 </div>
-                
-                <!-- Name input-->
+
+                <!-- desc input-->
                 <div class="form-outline mb-4">
-                    <input type="text" required name="description" id="username" class="form-control"/>
-                    <label class="form-label" for="title">UserName</label>
+                    <input type="text" required name="description" id="description" class="form-control"/>
+                    <label class="form-label" for="description">description</label>
                 </div> 
 
                  
