@@ -5,6 +5,7 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
+const BlogPost = require('./models/BlogPost');
 
 
 //middleware
@@ -17,9 +18,14 @@ app.set('view engine', 'ejs')
 
 //DB
 
-require('dotenv').config()
-
-
+//}
+  require('dotenv').config()
+//mongoose.connect(process.env.DB_URL)
+//if(mongoose){
+//    console.log("Connected to DB")
+//}else{
+//    console.log("Failed to connect to DB")
+//}
 
 mongoose.connect("mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.idiqxqa.mongodb.net/"+process.env.DB_NAME+"?retryWrites=true&w=majority")
 if(mongoose){
@@ -51,27 +57,45 @@ app.get('/contact', (req, res) =>{
     
 })
 
-app.get('/posts', (req, res) =>{
-    res.render('posts')
+// app.get('/post', (req, res) =>{
+    // res.render('post')
     
-})
+// })
 
-app.get('/blogs', async (req, res) =>{
-    const carposts = await carPost.find({})
-    res.render('blogs',{
-        carposts
-    })
-})
+ app.get('/post', async (req, res) =>{
+     const blogposts = await BlogPost.find({})
+   res.render('post',{
+       blogposts
+   })
+}) 
+
 
 app.get('/posts/new', (req, res)=>{
     res.render('create')
 })
-app.get('/posts/store', (req, res)=>{
-    carPost.create(req.body, (error, carPost)=>{
-        res.render('/blogs')
-    })
-    
-})
+//app.post('/posts/store', async (req, res)=>{
+//    await BlogPost.create(req.body , (error,blogpost)=>{
+//        res.redirect('/blogs')
+//    })
+//    
+//})
+
+app.get('/post/store', async (req, res) => {
+    try {
+        // Assuming req.body contains the necessary fields for your BlogPost model
+        const newBlogPost = new BlogPost(req.body);
+        
+        // Save the new blog post to the database
+        await newBlogPost.save();
+
+        // Redirect to the blogs page after successful creation
+        res.redirect('/blogs');
+    } catch (error) {
+        // Handle any errors that occur during the process
+        console.error('Error creating blog post:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 // app.get('/notfound', (req, res) =>{

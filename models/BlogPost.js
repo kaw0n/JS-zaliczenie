@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const carPostSchema = new Schema({
+const BlogPostSchema = new Schema({
     model: String,
     productionYear: String,
-    description: String
-})
+    description: String,
+    
+});
 
-const carPost= mongoose.model("carPost", carPostSchema)
+const BlogPost = mongoose.model("BlogPost", BlogPostSchema)
 //module.exports = mongoose.model("carPost", carPostSchema)
-module.exports = carPost;
+module.exports = BlogPost;

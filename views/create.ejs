@@ -10,32 +10,24 @@
             <form class="mt-3"action="/posts/store" method="POST" enctype="multipart/form-data">
                 <!-- Name input-->
                 <div class="form-outline mb-4">
-                    <input type="text" required name="title" id="title" class="form-control"/>
+                    <input type="text" required name="model" id="title" class="form-control"/>
                     <label class="form-label" for="title">Post Title</label>
                 </div> 
                 
                 <!-- Name input-->
                 <div class="form-outline mb-4">
-                    <input type="email" required name="email" id="email" class="form-control"/>
+                    <input type="email" required name="productionYear" id="email" class="form-control"/>
                     <label class="form-label" for="title">Email</label>
                 </div>
                 
                 <!-- Name input-->
                 <div class="form-outline mb-4">
-                    <input type="text" required name="username" id="username" class="form-control"/>
+                    <input type="text" required name="description" id="username" class="form-control"/>
                     <label class="form-label" for="title">UserName</label>
                 </div> 
 
-                <!--Image-->
-                <div class="form-outline mb-4">
-                    Choose An Image
-                    <input type="file" required name="image" id="image" accept=".jpg, .jpeg, . " class="form-control"/>
-                </div>
+                 
 
-                <!--Message input-->
-                <div class="form-outline mb-4">
-                    <textarea class="form-control" spellcheck="true" maxlength="315" required name="body" id="body"></textarea>
-                </div>
 
                 <script>
                     $('#boay').summernote({
