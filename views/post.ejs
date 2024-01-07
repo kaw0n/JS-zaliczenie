@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('layouts/header') -%>
+  <%- include('layouts/header') -%>
 <body>
 
   <%- include('layouts/navbar') -%>
 
-    <div class="container mt-4">
-      <h1 class="display-4 mt-4 mb-5"> Posts Page </h1>
-      <nav aria-label="breadcrumb mb-5">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item "><a href="/posts/new">Create new post</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Single Post </li>
-        </ol>
-      </nav>
+  <div class="container mt-4">
+    <h1 class="display-4 mt-4 mb-5"> Posts Page </h1>
+    <nav aria-label="breadcrumb mb-5">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a href="/posts/new">Create new post</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Single Post </li>
+      </ol>
+    </nav>
 
     <div class="container">
-      <article>
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <h1>
-               <%= blogposts %>
-             </h1>
-              <h3>
-                <%= blogposts %>
-              </h3>
-              <p>
-                Created Today
-              </p>
+      <% const sortedBlogPosts = blogposts.slice().reverse(); %>
+      <% for (const blogPost of sortedBlogPosts) { %>
+        <article class="blogpost">
+          <div class="frame">
+            <div class="row">
+              <div class="col-lg-8 col-md-10 mx-auto">
+                <h1 class="mb-4"><%= blogPost.model %></h1>
+                <hr>
+                <h3 class="mb-4"><%= blogPost.productionYear %></h3>
+                <hr>
+                <p class="mb-4"><%= blogPost.description %></p>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+          <hr>
+        </article>
+      <% } %>
     </div>
+  </div>
 </div>
 </body>
   <%- include('layouts/footer') -%>
-<!-- MDB -->
 <%- include('layouts/scripts') -%>
 
 </html>
