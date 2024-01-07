@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
-
+const morgan = require('morgan');
 
 //middleware
 app.use(bodyParser.json())
@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({extended:true}))
 //ejs
 app.set('view engine', 'ejs')
 
+//middleware & stati
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true}));
+app.use(morgan('dev'));
 //DB
 
 //}
@@ -81,21 +85,45 @@ app.get('/posts/new', (req, res)=>{
 //})
 
 app.post('/posts/store', async (req, res) => {
+    console.log(req.body);
+
     try {
-        // Assuming req.body contains the necessary fields for your BlogPost model
-        const newBlogPost = new BlogPost(req.body);
+        // Create a new BlogPost instance with data from req.body
+        const newBlogPost = new BlogPost({
+            model: req.body.model,
+            productionYear: req.body.productionYear,
+            description: req.body.description,
+            // Add other fields as needed
+        });
         
         // Save the new blog post to the database
         await newBlogPost.save();
 
         // Redirect to the blogs page after successful creation
-        res.redirect('/post'); // Assuming '/posts' is the correct route for displaying all posts
+        res.redirect('/post');
     } catch (error) {
         // Handle any errors that occur during the process
         console.error('Error creating blog post:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
+// app.post('/posts/store', async (req, res) => {
+//     try {
+//         // Assuming req.body contains the necessary fields for your BlogPost model
+//         const newBlogPost = new BlogPost(req.body);
+        
+//         // Save the new blog post to the database
+//         await newBlogPost.save();
+
+//         // Redirect to the blogs page after successful creation
+//         res.redirect('/post'); // Assuming '/posts' is the correct route for displaying all posts
+//     } catch (error) {
+//         // Handle any errors that occur during the process
+//         console.error('Error creating blog post:', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 
 
