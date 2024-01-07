@@ -15,17 +15,19 @@
     </nav>
 
     <div class="container">
-      <% const sortedBlogPosts = blogposts.slice().reverse(); %>
-      <% for (const blogPost of sortedBlogPosts) { %>
+      <% const sortedBlogPosts = blogposts.slice(); %>
+      <% const reverseSortedBlogPosts = sortedBlogPosts.reverse(); %>
+
+      <% for (const blogPost of reverseSortedBlogPosts) { %>
         <article class="blogpost">
           <div class="frame">
             <div class="row">
               <div class="col-lg-8 col-md-10 mx-auto">
-                <h1 class="mb-4"><%= blogPost.model %></h1>
+                <h1 class="mb-4">Model: <a href="/posts/<%= blogPost.id %>"><%= blogPost.model %></a></h1>
                 <hr>
-                <h3 class="mb-4"><%= blogPost.productionYear %></h3>
+                <h3 class="mb-4">Rok produkcji: <%= blogPost.productionYear %></h3>
                 <hr>
-                <p class="mb-4"><%= blogPost.description %></p>
+                <p class="mb-4">Opis: <%= blogPost.description %></p>
               </div>
             </div>
           </div>
@@ -37,6 +39,6 @@
 </div>
 </body>
   <%- include('layouts/footer') -%>
-<%- include('layouts/scripts') -%>
+  <%- include('layouts/scripts') -%>
 
 </html>

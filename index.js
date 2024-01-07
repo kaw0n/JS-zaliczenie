@@ -66,12 +66,23 @@ app.get('/contact', (req, res) =>{
     
 // })
 
- app.get('/post', async (req, res) =>{
-     const blogposts = await BlogPost.find({})
-   res.render('post',{
-       blogposts
-   })
-}) 
+app.get('/post', async (req, res) => {
+    const blogpostID = req.query.id; // Check if the ID is in the query params
+
+    if (blogpostID) {
+        // Redirect to the specific post page using the ID
+        res.redirect(`/posts/${blogpostID}`);
+        return;
+    }
+
+    // Retrieve all blog posts
+    const blogposts = await BlogPost.find({});
+
+    // Render the 'post' template passing the blogposts data
+    res.render('post', {
+        blogposts
+    });
+});
 
 
 app.get('/posts/new', (req, res)=>{
@@ -107,6 +118,19 @@ app.post('/posts/store', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.get('/posts/:id', async (req, res) => {
+    const blogPost = await BlogPost.findById(req.params.id);
+  
+    if (!blogPost) {
+      return res.status(404).send('Post not found');
+    }
+  
+    // Pass the specific post data to the 'single-post' template
+    res.render('single-post', {
+      blogPost
+    });
+  });
 
 // app.post('/posts/store', async (req, res) => {
 //     try {
