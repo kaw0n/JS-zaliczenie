@@ -1,76 +1,40 @@
 //const express = require('express');
 const BlogPost = require('../models/BlogPost');
 const router = require('../router/blogRoutes');
-const User = require('../models/User')
-const Joi = require('joi')
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const Joi = require('joi');
 
-const user_signup = async (req, res, next) => {
+const create_user = async (req, res) => {
     try {
-        const validationResult = validateUserData(req.body);
-
-        if (validationResult.error) {
-            return res.status(400).json({
-                status: 'fail',
-                message: 'Validation error',
-                errors: validationResult.error,
-            });
-        }
-
-        const newUser = await User.create(req.body);
-
-        return res.status(201).json({
-            status: 'success',
-            data: {
-                user: newUser,
-            },
-        });
+      const { email, password, confirmPassword } = req.body;
+  
+      // Check if the password and confirmPassword match
+      if (password !== confirmPassword) {
+        return res.status(400).json({ error: 'Passwords do not match' });
+      }
+  
+      // Hash the password before saving it to the database
+      const hashedPassword = await bcrypt.hash(password, 12);
+  
+      // Create a new user instance
+      const newUser = new User({
+        email,
+        password: hashedPassword,
+        confirmPassword: hashedPassword,
+      });
+      
+      // Save the user to the database
+      await newUser.save();
+  
+      res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            status: 'error',
-            message: 'Internal Server Error',
-        });
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
-};
-
-const validateUserData = (User) => {
-    const errors = {};
-
-    // Validate 'username'
-    if (!User.username || typeof User.username !== 'string' || User.username.trim() === '') {
-        errors.username = 'Username is required and must be a non-empty string';
-    }
-
-    // Validate 'email'
-    if (!User.email || typeof User.email !== 'string' || !User.email.includes('@')) {
-        errors.email = 'Email is required and must be a valid email address';
-    }
-
-    // Add more validation rules as needed for other properties
-
-    // Check if there are any errors
-    if (Object.keys(errors).length > 0) {
-        return { error: errors };
-    }
-
-    // If no errors, return null
-    return { error: null };
-};
-
-// const user_signup = async (req, res, next) => {
-
-//    const newUser = await User.create(req.body);
-
-//    res.status(201).json({
-//     status: 'success',
-//     data:{
-//         user: newUser
-//     }
-//     });
-// };
-
+  };
 
 
 module.exports = {
-    user_signup
+    create_user
 }

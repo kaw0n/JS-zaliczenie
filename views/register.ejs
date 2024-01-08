@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./layouts/header') -%>
+<body>
+    <%- include('./layouts/navbar') -%>
+
+        <div class="container-main card p-5 mt-3 mb-5 ">
+                <h1 class="display-4 mb-5">Create a User</h1>
+
+            <form class="mt-3" action="/auth/register" method="POST">
+                <!-- model input-->
+                <div class="form-outline mb-4">
+                    <input type="email" name="email" required>
+                    <label class="form-label" for="title">email</label>
+                </div> 
+                
+                <!-- rok produkcja input-->
+                <div class="form-outline mb-4">
+                    <input type="password" name="password" required>
+                    <label class="form-label" for="year">hasło</label>
+                </div>
+
+                <!-- desc input-->
+                <div class="form-outline mb-4">
+                    <input type="password" name="confirmpassword" required>
+                    <label class="form-label" for="description">confirm password</label>
+                </div>
+
+                <script>
+                    $('#boay').summernote({
+                         placeholder: "Your message goes here",
+                         tabsize: 2,
+                         height: 200
+                        });
+                </script>
+
+                <!--Submit button-->
+                <button type="submit" class="btn btn-primary btn-block" mb-4>Send</button>
+            </form>
+        </div>
+        <%- include('./layouts/footer') -%>
+
+</body>
+<!--MDB-->
+<%- include('./layouts/scripts') -%>
+</html>

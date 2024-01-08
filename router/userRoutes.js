@@ -8,6 +8,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
-router.post('/signup', userControllers.user_signup)
+router.post('/auth/register', userControllers.create_user);
 
 module.exports = router;

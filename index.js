@@ -5,7 +5,6 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
 const bodyParser = require('body-parser');
-const BlogPost = require('./models/BlogPost');
 const morgan = require('morgan');
 const blogRoutes = require('./router/blogRoutes');
 const userRoutes = require('./router/userRoutes');
@@ -16,6 +15,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // blog routes
 app.use(blogRoutes);
+app.use(userRoutes);
 
 //ejs
 app.set('view engine', 'ejs')
@@ -40,6 +40,10 @@ else{
 
 //styles& scripts
 app.use(express.static('public'));
+
+
+//user registration
+
 
 app.listen(3000, () =>{
     console.log("app listening")
