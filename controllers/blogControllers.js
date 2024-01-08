@@ -1,10 +1,7 @@
 //const express = require('express');
 const BlogPost = require('../models/BlogPost');
 const router = require('../router/blogRoutes');
-//const blogControllers = require('../controllers/blogControllers');
-// const blog_create_get = (req, res) => {
-//     res.render('create');
-// }
+const fs = require('fs').promises;
 
 
 const blog_create_get =(req, res) => {
@@ -13,16 +10,20 @@ const blog_create_get =(req, res) => {
 
 
 const blog_create_post = async (req, res) => {
-    console.log(req.body);
     try {
-        // Create a new BlogPost instance with data from req.body
+        const { model, productionYear, description } = req.body;
+
+        // Check if an image file was uploaded
+        const imageData = req.file ? req.file.buffer : undefined;
+
+        // Create a new BlogPost instance with data from req.body and imageData
         const newBlogPost = new BlogPost({
-            model: req.body.model,
-            productionYear: req.body.productionYear,
-            description: req.body.description,
-            // Add other fields as needed
+            model,
+            productionYear,
+            description,
+            imageData,
         });
-        
+
         // Save the new blog post to the database
         await newBlogPost.save();
 
@@ -33,7 +34,7 @@ const blog_create_post = async (req, res) => {
         console.error('Error creating blog post:', error);
         res.status(500).send('Internal Server Error');
     }
-}
+};
 
 const blog_create_details = async (req, res) => {
     const blogpostID = req.query.id; // Check if the ID is in the query params

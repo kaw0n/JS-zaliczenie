@@ -2,20 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
-    model:{ 
-    type: String,
-    required: true
+    model: {
+        type: String,
+        required: true,
     },
-    productionYear:{ 
+    productionYear: {
         type: String,
-        required: true
-        },
-    description: { 
+        required: true,
+    },
+    description: {
         type: String,
-        required: true
-        }
-},{ timestamps: true });
+        required: true,
+    },
+    imageData: {
+        type: Buffer, // Store image data as Buffer
+    },
+}, { timestamps: true });
 
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema)
-//module.exports = mongoose.model("carPost", carPostSchema)
+const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 module.exports = BlogPost;

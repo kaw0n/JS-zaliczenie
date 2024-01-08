@@ -28,6 +28,11 @@
                 <h3 class="mb-4">Rok produkcji: <%= blogPost.productionYear %></h3>
                 <hr>
                 <p class="mb-4">Opis: <%= blogPost.description %></p>
+                
+                <!-- Display image if available -->
+                <% if(blogPost.imageData && blogPost.imageData.length > 0) { %>
+                  <img src="data:image/<%= blogPost.imageData.contentType %>;base64,<%= blogPost.imageData.toString('base64') %>" class="img-fluid" alt="Post Image">
+                <% } %>
               </div>
             </div>
           </div>
