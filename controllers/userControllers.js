@@ -5,6 +5,34 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const Joi = require('joi');
 
+const log_in_method = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find the user by email in the database
+    const user = await User.findOne({ email });
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Check if the provided password matches the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // If authentication succeeds, you may choose to generate a token, set a session, or perform other actions
+
+    res.status(200).json({ message: 'Login successful', user: { email: user.email } });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const create_user = async (req, res) => {
     try {
       const { email, password, confirmPassword } = req.body;
@@ -23,7 +51,9 @@ const create_user = async (req, res) => {
         password: hashedPassword,
         confirmPassword: hashedPassword,
       });
-      
+
+     
+
       // Save the user to the database
       await newUser.save();
   
@@ -35,12 +65,20 @@ const create_user = async (req, res) => {
   };
 
   
-  const user_create_view =(req, res) => {
-    res.render('register');
-};
+      const user_create_view =(req, res) => {
+        res.render('register');
+    };
+
+
+
+const user_login_view =(req,res) =>{
+  res.render('login');
+}
 
 
 module.exports = {
   user_create_view,
-  create_user
+  create_user,
+  user_login_view,
+  log_in_method
 }
