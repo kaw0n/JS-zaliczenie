@@ -5,9 +5,16 @@ const BlogPost = require('../models/BlogPost');
 //     res.render('create');
 // }
 
+
+const blog_create_get =(req, res) => {
+    res.render('create');
+};
+
+
 const blog_create_post = async (req, res) => {
     console.log(req.body);
 
+    
     try {
         // Create a new BlogPost instance with data from req.body
         const newBlogPost = new BlogPost({
@@ -61,9 +68,6 @@ const blog_find_id = async (req, res) => {
 
 }
 
-const blog_create_get =(req, res) => {
-      res.render('views/create');
-  };
 
 module.exports = {
     blog_create_get,

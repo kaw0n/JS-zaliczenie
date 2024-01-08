@@ -4,10 +4,10 @@ const blogControllers = require('../controllers/blogControllers');
 
 const router = express.Router(); 
 
-router.get('/posts/:id', blogControllers.blog_find_id)
-router.post('/posts/store', blogControllers.blog_create_post )
-router.get('/posts/new', blogControllers.blog_create_get)
 router.get('/post', blogControllers.blog_create_details)
+router.get('/posts/new', blogControllers.blog_create_get)
+router.post('/posts/store', blogControllers.blog_create_post )
+router.get('/posts/:id', blogControllers.blog_find_id)
 
 
 router.get('/', (req, res) =>{
