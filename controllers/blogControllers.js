@@ -1,10 +1,9 @@
-const express = require('express');
+//const express = require('express');
 const BlogPost = require('../models/BlogPost');
-
-
-const blog_create_get = (req, res) => {
-    res.render('create')
-}
+//const blogControllers = require('../controllers/blogControllers');
+// const blog_create_get = (req, res) => {
+//     res.render('create');
+// }
 
 const blog_create_post = async (req, res) => {
     console.log(req.body);
@@ -61,6 +60,10 @@ const blog_find_id = async (req, res) => {
     });
 
 }
+
+const blog_create_get =(req, res) => {
+      res.render('views/create');
+  };
 
 module.exports = {
     blog_create_get,
