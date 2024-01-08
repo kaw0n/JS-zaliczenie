@@ -1,5 +1,6 @@
 //const express = require('express');
 const BlogPost = require('../models/BlogPost');
+const router = require('../router/blogRoutes');
 //const blogControllers = require('../controllers/blogControllers');
 // const blog_create_get = (req, res) => {
 //     res.render('create');
@@ -13,8 +14,6 @@ const blog_create_get =(req, res) => {
 
 const blog_create_post = async (req, res) => {
     console.log(req.body);
-
-    
     try {
         // Create a new BlogPost instance with data from req.body
         const newBlogPost = new BlogPost({
@@ -69,9 +68,31 @@ const blog_find_id = async (req, res) => {
 }
 
 
+const blog_deleteBlogPost = async (req, res) => {
+    try {
+        // Extract the ID of the post to be deleted from the request's URL path
+        const blogPostId = req.params.id;
+
+        // Find the blog post with the specified ID
+        const blogPost = await BlogPost.findByIdAndDelete(blogPostId);
+
+        if (!blogPost) {
+            return res.status(404).send('Post not found');
+        }
+
+        // If the deletion was successful, redirect to the 'post' route
+        res.redirect('/post');
+    } catch (error) {
+        console.error('Error deleting blog post:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
 module.exports = {
     blog_create_get,
     blog_create_details,
     blog_create_post,
-    blog_find_id
+    blog_find_id,
+    blog_deleteBlogPost
 }
