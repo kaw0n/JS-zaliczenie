@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const BlogPost = require('./models/BlogPost');
 const morgan = require('morgan');
 const blogRoutes = require('./router/blogRoutes');
+const userRoutes = require('./router/userRoutes');
 
 //middleware
 app.use(bodyParser.json())
