@@ -33,8 +33,12 @@ const create_user = async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
+  const user_create_view =(req, res) => {
+    res.render('register');
+};
 
 
 module.exports = {
-    create_user
+  user_create_view,
+  create_user
 }

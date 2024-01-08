@@ -9,5 +9,6 @@ const upload = multer({ storage: storage });
 
 
 router.post('/register', userControllers.create_user);
+router.get('/register/create',userControllers.user_create_view);
 
 module.exports = router;
