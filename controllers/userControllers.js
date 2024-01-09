@@ -20,6 +20,11 @@ const log_in_method = async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+    
+    // // Check if the password exists and is a string
+    if (!user.password || typeof user.password !== 'string') {
+      return res.status(500).json({ error: 'Invalid user password' });
+    }
 
     // Check if the provided password matches the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
