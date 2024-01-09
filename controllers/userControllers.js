@@ -10,12 +10,7 @@ const log_in_method = async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user by email in the database
- //   const user = await User.findOne({ email });
-    const user = await User.findOne({ email }).select('+password');
-
-    console.log('User:', user);
-    console.log('User Password:', user.password);
-    console.log('Provided Password:', password);
+   const user = await User.findOne({ email });
     
     // Check if the user exists
     if (!user) {
