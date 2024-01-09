@@ -85,6 +85,13 @@ const create_user = async (req, res) => {
     }
   };
 
+  const logout = (req, res) => {
+    // Clear the token from cookies
+    res.clearCookie('token');
+  
+    // Redirect to the login page (you can customize the URL)
+    res.redirect('/login');
+  };
   
     const user_create_view =(req, res) => {
       res.render('register');
@@ -98,5 +105,6 @@ module.exports = {
   user_create_view,
   create_user,
   user_login_view,
-  log_in_method
+  log_in_method,
+  logout
 }

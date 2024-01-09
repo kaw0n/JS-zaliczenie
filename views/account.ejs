@@ -40,7 +40,10 @@
       <!-- Display user-specific content for authenticated users -->
       <p>Welcome, <%= user.email %>!</p>
       <!-- Add any additional content for authenticated users here -->
-      <a href="/logout" class="btn btn-primary">Logout</a>
+      <!-- <a href="/logout" class="btn btn-primary">Logout</a> -->
+      <form action="/logout" method="POST">
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form>
     <% } else { %>
       <!-- Display message for unauthenticated users -->
       <p>Please log in to access your account.</p>
