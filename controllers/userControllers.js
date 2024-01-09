@@ -5,6 +5,10 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const Joi = require('joi');
 
+const user_login_view =(req,res) =>{
+  res.render('login');
+}
+
 const log_in_method = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -51,9 +55,6 @@ const create_user = async (req, res) => {
         password: hashedPassword,
         confirmPassword: hashedPassword,
       });
-
-     
-
       // Save the user to the database
       await newUser.save();
   
@@ -71,9 +72,6 @@ const create_user = async (req, res) => {
 
 
 
-const user_login_view =(req,res) =>{
-  res.render('login');
-}
 
 
 module.exports = {
