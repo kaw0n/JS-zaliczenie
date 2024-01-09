@@ -14,8 +14,13 @@ const log_in_method = async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user by email in the database
-    const user = await User.findOne({ email });
+ //   const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
 
+    console.log('User:', user);
+    console.log('User Password:', user.password);
+    console.log('Provided Password:', password);
+    
     // Check if the user exists
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
@@ -58,7 +63,7 @@ const create_user = async (req, res) => {
       const newUser = new User({
         email,
         password: hashedPassword,
-        confirmPassword: hashedPassword,
+ //       confirmPassword: hashedPassword,
       });
       // Save the user to the database
       await newUser.save();
@@ -66,7 +71,17 @@ const create_user = async (req, res) => {
       res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+    //   res.status(500).json({ error: 'Internal Server Error' });
+    // }
+    if (error.name === 'ValidationError') {
+      const errors = Object.values(error.errors).reduce((acc, { properties }) => {
+        acc[properties.path] = properties.message;
+        return acc;
+      }, {});
+      return res.status(400).json({ status: 'fail', message: 'Validation error', errors });
+    }
+
+    res.status(500).json({ error: 'Internal Server Error' });
     }
   };
 
