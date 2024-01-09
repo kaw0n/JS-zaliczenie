@@ -1,16 +1,47 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('layouts/header') -%>
+  
+<%- include('layouts/header') -%>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarCollect</title>
+  <!-- Add Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous">
+  <!-- Add your custom CSS here -->
+  <style>
+    body {
+      background-image: url('https://www.lesschwab.com/on/demandware.static/-/Library-Sites-LesSchwabLibrary/default/dw3e4e8ebe/images/learningCenter/article/hero/HeroArticleWinterTipsDriveInSnowDesktop_2048.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
 <body>
-
   <%- include('layouts/navbar') -%>
+  <header class="container-fluid p-5">
+    <div class="row">
+      <div class="col-md-6 ">
+        <h1>Sprzedaż samochodów</h1>
+        <p>Lubimy to co robimy, robimy to z pasją , jest tu sporo pasjonatów . I oto tu chodzi </p>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Join our ride</h2>
+        <p>Są tu sami pasjonaci sprzedający swoje auta</p>
 
-    <h1>Home page</h1>
-
-    
+    </div>
+  </main>
+  <!-- Add Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 </body>
-  <%- include('layouts/footer') -%>
+<%- include('layouts/footer') -%>
 <!-- MDB -->
 <%- include('layouts/scripts') -%>
-
 </html>
