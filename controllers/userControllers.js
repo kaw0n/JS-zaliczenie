@@ -86,16 +86,16 @@ const create_user = async (req, res) => {
   };
 
   const logout = (req, res) => {
-    // Clear the token from cookies
-    res.clearCookie('token');
+    // Clear the 'authToken' cookie
+    res.clearCookie('authToken');
   
     // Redirect to the login page (you can customize the URL)
     res.redirect('/login');
   };
   
-    const user_create_view =(req, res) => {
-      res.render('register');
-    };
+  const user_create_view =(req, res) => {
+    res.render('register');
+  };
 
 
 
