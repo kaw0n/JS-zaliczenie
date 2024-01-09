@@ -8,6 +8,11 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const blogRoutes = require('./router/blogRoutes');
 const userRoutes = require('./router/userRoutes');
+const cookieParser = require('cookie-parser');
+
+
+//
+app.use(cookieParser());
 
 //middleware
 app.use(bodyParser.json())

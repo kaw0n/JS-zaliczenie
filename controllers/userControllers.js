@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const jwt= require("jsonwebtoken")
 
 const user_login_view =(req,res) =>{
   res.render('login');
@@ -10,14 +11,14 @@ const log_in_method = async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user by email in the database
-   const user = await User.findOne({ email });
-    
+    const user = await User.findOne({ email });
+
     // Check if the user exists
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
-    // // Check if the password exists and is a string
+
+    // Check if the password exists and is a string
     if (!user.password || typeof user.password !== 'string') {
       return res.status(500).json({ error: 'Invalid user password' });
     }
@@ -29,9 +30,18 @@ const log_in_method = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // If authentication succeeds, you may choose to generate a token, set a session, or perform other actions
+    // If authentication succeeds, generate a token
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.JWT_KEY,
+      { expiresIn: '30s' }
+    );
+    res.cookie('authToken', token, { maxAge: 3600000, httpOnly: true });
 
-    res.status(200).json({ message: 'Login successful', user: { email: user.email } });
+    // Return a JSON response with the token
+    // res.status(200).json({ message: 'Login successful', token });
+    res.redirect('/post');
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -77,8 +87,8 @@ const create_user = async (req, res) => {
   };
 
   
-      const user_create_view =(req, res) => {
-        res.render('register');
+    const user_create_view =(req, res) => {
+      res.render('register');
     };
 
 
