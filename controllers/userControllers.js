@@ -34,7 +34,7 @@ const log_in_method = async (req, res) => {
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_KEY,
-      { expiresIn: '30s' }
+      { expiresIn: '1h' }
     );
     res.cookie('authToken', token, { maxAge: 3600000, httpOnly: true });
 
