@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 
-const authMiddleware = (req, res, next) => {
+module.exports = (req, res, next) => {
   // Extract the token from the request cookies
   const token = req.cookies.authToken;
 
@@ -25,4 +25,3 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
