@@ -69,11 +69,10 @@ const create_user = async (req, res) => {
       // Save the user to the database
       await newUser.save();
   
-      res.status(201).json({ message: 'User created successfully' });
+      res.redirect('/login');
     } catch (error) {
       console.error(error);
-    //   res.status(500).json({ error: 'Internal Server Error' });
-    // }
+
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).reduce((acc, { properties }) => {
         acc[properties.path] = properties.message;
