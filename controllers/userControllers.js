@@ -1,9 +1,5 @@
-//const express = require('express');
-const BlogPost = require('../models/BlogPost');
-const router = require('../router/blogRoutes');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const Joi = require('joi');
 
 const user_login_view =(req,res) =>{
   res.render('login');

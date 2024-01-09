@@ -14,20 +14,9 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Please enter a password'],
-        minlenght: 8,
-        select: false
+        minlenght: 8 ['password is to short'],
+        // select: false
     },
-    confirmPassword: {
-        type: String,
-        required: [true, 'Please confirm your password'],
-        validate: {
-            validator: function(val) {
-                 return val === this.password;
-                },
-                message: "Passwords do not match"
-
-        }
-    }
 });
 
 const User = mongoose.model('User', UserSchema);
