@@ -89,6 +89,40 @@ const blog_deleteBlogPost = async (req, res) => {
     }
 };
 
+const blog_update_post = async (req, res) => {
+    try {
+        const { id } = req.params; // Extract the post ID from the URL path
+        const updatedPostData = req.body; // Get updated post data from the request body
+
+        // Find the blog post with the specified ID
+        const blogPost = await BlogPost.findById(id);
+
+        if (!blogPost) {
+            return res.status(404).send('Post not found');
+        }
+
+        // Update the blog post with the provided data
+        blogPost.model = updatedPostData.model;
+        blogPost.productionYear = updatedPostData.productionYear;
+        blogPost.description = updatedPostData.description;
+
+        if (req.file) {
+            // Check if an image file was uploaded
+            const imageData = req.file.buffer;
+            blogPost.imageData = imageData;
+        }
+
+        // Save the updated blog post to the database
+        await blogPost.save();
+
+        // Redirect to the updated post page
+        res.redirect(`/post/${id}`);
+    } catch (error) {
+        console.error('Error updating blog post:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 const account_view = (req, res) => {
     // Pass authentication status and user data to the view
     const isAuthenticated = req.user !== undefined;
@@ -103,5 +137,6 @@ module.exports = {
     blog_create_post,
     blog_find_id,
     blog_deleteBlogPost,
-    account_view
+    account_view,
+    blog_update_post
 }
