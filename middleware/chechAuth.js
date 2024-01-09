@@ -8,7 +8,7 @@ const authMiddleware = (req, res, next) => {
 
   // Check if the token is present
   if (!token) {
-    return res.status(401).json({ error: 'Unauthorized - Missing Token' });
+    res.redirect('/error');
   }
 
   try {
@@ -21,7 +21,7 @@ const authMiddleware = (req, res, next) => {
     // Move to the next middleware or route handler
     next();
   } catch (error) {
-    return res.status(401).json({ error: 'Unauthorized - Invalid Token' });
+    res.redirect('/error');
   }
 };
 

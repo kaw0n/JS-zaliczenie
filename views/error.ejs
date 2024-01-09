@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big H1 Text</title>
+    <style>
+       body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .breadcrumb {
+            display: flex;
+            padding: 10px;
+            background-color: #e74c3c;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-item {
+            list-style: none;
+            margin-right: 10px;
+        }
+
+        .breadcrumb-item a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>PLEASE LOGIN TO CONTINUE YOUR ACTION</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/register/create">Register</a></li>
+    </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/login">Login</a></li>
+    </ol>
+</body>
+</html>

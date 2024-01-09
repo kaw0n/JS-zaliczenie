@@ -89,11 +89,19 @@ const blog_deleteBlogPost = async (req, res) => {
     }
 };
 
+const account_view = (req, res) => {
+    // Pass authentication status and user data to the view
+    const isAuthenticated = req.user !== undefined;
+    
+    // Render the account page with the authentication status and user data
+    res.render('account', { isAuthenticated, user: req.user });
+  };
 
 module.exports = {
     blog_create_get,
     blog_create_details,
     blog_create_post,
     blog_find_id,
-    blog_deleteBlogPost
+    blog_deleteBlogPost,
+    account_view
 }
