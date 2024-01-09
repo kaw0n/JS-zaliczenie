@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const validator = require('validator');
+const bcrypt= require('bcryptjs');
 
 const UserSchema = new Schema({
     email: {
@@ -17,6 +18,17 @@ const UserSchema = new Schema({
         minlenght: 8 ['password is to short'],
         // select: false
     },
+    confirmPassword: {
+        type: String,
+        required: [true, 'Please confirm your password'],
+        validate: {
+            validator: function(val) {
+                 return val === this.password;
+                },
+                message: "Passwords do not match"
+
+        }
+    }
 });
 
 const User = mongoose.model('User', UserSchema);
