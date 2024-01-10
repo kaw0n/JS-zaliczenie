@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <%- include('layouts/header') -%>
+  <style>
+    .frame {
+        border: 2px solid black;
+        background-color: #ffffff;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .post, .model {
+        margin-bottom: 20px;
+    }
+</style>
 <body>
 
   <%- include('layouts/navbar') -%>
@@ -12,33 +24,35 @@
         <a href="/posts/new" class="btn btn-success">Create a new Post</a>
       </ol>
     </nav>
-
     <div class="container">
-      <% const sortedBlogPosts = blogposts.slice(); %>
-      <% const reverseSortedBlogPosts = sortedBlogPosts.reverse(); %>
-
-      <% for (const blogPost of reverseSortedBlogPosts) { %>
-        <article class="blogpost">
-          <div class="frame">
-            <div class="row">
-              <div class="col-lg-8 col-md-10 mx-auto">
-                <h1 class="mb-4">Model: <a href="/posts/<%= blogPost.id %>"><%= blogPost.model %></a></h1>
-                <hr>
-                <h3 class="mb-4">Rok produkcji: <%= blogPost.productionYear %></h3>
-                <hr>
-                <p class="mb-4">Opis: <%= blogPost.description %></p>
-                
-                <!-- Display image if available -->
-                <% if(blogPost.imageData && blogPost.imageData.length > 0) { %>
-                  <img src="data:image/<%= blogPost.imageData.contentType %>;base64,<%= blogPost.imageData.toString('base64') %>" class="img-fluid" alt="Post Image">
-                <% } %>
-              </div>
-            </div>
-          </div>
-          <hr>
-        </article>
-      <% } %>
-    </div>
+      <div class="row">
+         <% const sortedBlogPosts = blogposts.slice(); %>
+         <% const reverseSortedBlogPosts = sortedBlogPosts.reverse(); %>
+     
+         <% for (const blogPost of reverseSortedBlogPosts) { %>
+           <div class="col-md-4">
+             <div class="frame">
+               <article class="blogpost">
+                 <div class="row">
+                   <div class="col-lg-8 col-md-10 mx-auto">
+                     <h1 class="mb-4">Model: <a href="/posts/<%= blogPost.id %>"><%= blogPost.model %></a></h1>
+                     <hr>
+                     <h3 class="mb-4">Rok produkcji: <%= blogPost.productionYear %></h3>
+                     <hr>
+                     <p class="mb-4">Opis: <%= blogPost.description %></p>
+                     
+                     <!-- Display image if available -->
+                     <% if(blogPost.imageData && blogPost.imageData.length > 0) { %>
+                      <img src="data:image/<%= blogPost.imageData.contentType %>;base64,<%= blogPost.imageData.toString('base64') %>" class="img-fluid" alt="Post Image">
+                     <% } %>
+                   </div>
+                 </div>
+               </article>
+             </div>
+           </div>
+         <% } %>
+     
+    
   </div>
 </div>
 </body>
