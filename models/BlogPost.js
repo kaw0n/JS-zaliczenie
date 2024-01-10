@@ -7,7 +7,7 @@ const BlogPostSchema = new Schema({
         required: true,
     },
     productionYear: {
-        type: String,
+        type: "number",
         required: true,
     },
     description: {
