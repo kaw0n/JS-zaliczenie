@@ -13,7 +13,8 @@ const blog_create_post = async (req, res) => {
     try {
         const { model, productionYear, description } = req.body;
         
-        const userId = req.body.userId
+        // Access the user ID from req.user
+        const creatorId = req.user.userId;
 
         // Check if an image file was uploaded
         const imageData = req.file ? req.file.buffer : undefined;
@@ -24,7 +25,8 @@ const blog_create_post = async (req, res) => {
             productionYear,
             description,
             imageData,
-            userId,
+            creatorId
+            
         });
 
         // Save the new blog post to the database
@@ -76,12 +78,22 @@ const blog_deleteBlogPost = async (req, res) => {
     try {
         // Extract the ID of the post to be deleted from the request's URL path
         const blogPostId = req.params.id;
+        const creatorId = req.user.userId;
 
         // Find the blog post with the specified ID
-        const blogPost = await BlogPost.findByIdAndDelete(blogPostId);
+        const blogPost = await BlogPost.findById(blogPostId);
 
         if (!blogPost) {
             return res.status(404).send('Post not found');
+        }
+
+        // Access the creatorId property from the retrieved blog post
+        const postCreatorId = blogPost.creatorId;
+
+        if (creatorId == postCreatorId) {
+            await BlogPost.deleteOne({ _id: blogPostId }); // Using deleteOne instead of Delete
+        } else {
+            return res.status(400).send('<script>alert("Permission denied"); window.location.href = "/post";</script>');
         }
 
         // If the deletion was successful, redirect to the 'post' route

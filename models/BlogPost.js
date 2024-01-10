@@ -17,9 +17,10 @@ const BlogPostSchema = new Schema({
     imageData: {
         type: Buffer, // Store image data as Buffer
     },
-    user: {
-        
-    }
+    creatorId: {
+        type: String, // Reference to the User model
+        required: true,
+    },
 }, { timestamps: true });
 
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
