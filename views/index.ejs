@@ -1,47 +1,139 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-  
-<%- include('layouts/header') -%>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarCollect</title>
-  <!-- Add Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous">
-  <!-- Add your custom CSS here -->
-  <style>
-    body {
-      background-image: url('https://www.lesschwab.com/on/demandware.static/-/Library-Sites-LesSchwabLibrary/default/dw3e4e8ebe/images/learningCenter/article/hero/HeroArticleWinterTipsDriveInSnowDesktop_2048.jpg');
-      background-size: cover;
-      background-position: center;
-    }
-  </style>
-</head>
-<body>
-  <%- include('layouts/navbar') -%>
-  <header class="container-fluid p-5">
-    <div class="row">
-      <div class="col-md-6 ">
-        <h1>Sprzedaż samochodów</h1>
-        <p>Lubimy to co robimy, robimy to z pasją , jest tu sporo pasjonatów . I oto tu chodzi </p>
-      </div>
-    </div>
-  </header>
-  <main class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>Join our ride</h2>
-        <p>Są tu sami pasjonaci sprzedający swoje auta</p>
 
+<%- include('./layouts/header') -%>
+
+<head>
+  <%- include('./layouts/navbar') -%>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Samochodowa</title>
+    <!-- Dodaj linki do plików CSS Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #91bbe0, #536bf3);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(to right, #4286f4, #373B44);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        h1, h2, p {
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .site-description {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .left-column, .middle-column, .right-column {
+            width: calc(33.33% - 20px); /* 20px to uwzględni margines między kolumnami */
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #bac4e4;
+            border-color: #8498da;
+        }
+
+        .btn-primary:hover {
+            background-color: #bac4e4;
+            border-color: #8498da;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Witaj na Stronie Samochodowej</h1>
+            <p>Znajdź idealny samochód lub sprzedaj swój obecny!</p>
+        </header>
+
+        <div class="site-description">
+            <p>Witamy na naszej platformie samochodowej. Odkryj unikalne oferty, zarządzaj swoimi ogłoszeniami, a także skorzystaj z zalet posiadania konta. Znajdź swój wymarzony samochód lub dodaj swoją ofertę już dziś!</p>
+        </div>
+
+        <div class="row">
+            <section class="left-column">
+                <a href="/login" class="btn btn-primary">Zaloguj się</a>
+                <h2>Zalety posiadania konta:</h2>
+                <p>1. Szybsze dodawanie ofert.</p>
+                <p>2. Śledzenie ulubionych ofert.</p>
+                <p>3. Możliwość zarządzania swoimi ogłoszeniami.</p>
+            </section>
+
+            <section class="middle-column">
+                <h2>Wyróżniamy się:</h2>
+                <p>Nasza strona oferuje unikalne funkcje, takie jak:</p>
+                <p>1. Wyszukiwanie ofert z łatwością.</p>
+                <p>2. System ocen i opinii użytkowników.</p>
+                <p>3. Regularne aktualizacje ofert.</p>
+            </section>
+
+            <section class="right-column">
+                <a href="/post" class="btn btn-primary">Zobacz Oferty</a>
+                <p>Przeglądaj nasze najnowsze oferty samochodowe.</p>
+            </section>
+        </div>
+        <img src="https://th.bing.com/th/id/OIP.i2v5AqHq257Cu4-oxLDP-QHaEK?w=305&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="img-fluid" alt="Header Image"> <!-- Dodane zdjęcie -->
+        <div class="row">
+            <!-- Przykładowa karta oferty samochodowej -->
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- <img src="https://via.placeholder.com/150" class="card-img-top" alt="Samochód"> -->
+                    <div class="card-body">
+                        <h5 class="card-title">Zobacz więcej samochodów</h5>
+                        <p class="card-text">Opis oferty samochodu.</p>
+                        <a href="/post" class="btn btn-primary">Zobacz więcej</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dodaj więcej kart ofert samochodowych tutaj -->
+        </div>
     </div>
-  </main>
-  <!-- Add Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+    <!-- Dodaj linki do plików JavaScript Bootstrap i jQuery (opcjonalne) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-<%- include('layouts/footer') -%>
-<!-- MDB -->
-<%- include('layouts/scripts') -%>
+
 </html>
