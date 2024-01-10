@@ -15,19 +15,19 @@ const log_in_method = async (req, res) => {
 
     // Check if the user exists
     if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(400).send('<script>alert("Invalid credentials"); window.location.href = "/login";</script>');
     }
 
     // Check if the password exists and is a string
     if (!user.password || typeof user.password !== 'string') {
-      return res.status(500).json({ error: 'Invalid user password' });
+      return res.status(400).send('<script>alert("Invalid credentials"); window.location.href = "/login";</script>');
     }
 
     // Check if the provided password matches the stored hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(400).send('<script>alert("Invalid credentials"); window.location.href = "/login";</script>');
     }
 
     // If authentication succeeds, generate a token
@@ -49,41 +49,41 @@ const log_in_method = async (req, res) => {
 };
 
 const create_user = async (req, res) => {
-    try {
+  try {
       const { email, password, confirmPassword } = req.body;
-  
+
       // Check if the password and confirmPassword match
       if (password !== confirmPassword) {
-        return res.status(400).json({ error: 'Passwords do not match' });
+        return res.status(400).send('<script>alert("Passwords does not match"); window.location.href = "/register/create";</script>');
       }
-  
+
+      // Check if the email already exists in the database
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).send('<script>alert("User with this email already exists"); window.location.href = "/register/create";</script>');
+      }
+
+      if (password.length < 8) {
+        return res.status(400).send('<script>alert("Password should be at least 8 characters long"); window.location.href = "/register/create";</script>');
+    }
+
       // Hash the password before saving it to the database
       const hashedPassword = await bcrypt.hash(password, 12);
-  
+
       // Create a new user instance
       const newUser = new User({
-        email,
-        password: hashedPassword,
- //       confirmPassword: hashedPassword,
+          email,
+          password: hashedPassword,
       });
+
       // Save the user to the database
       await newUser.save();
-  
+
       res.redirect('/login');
-    } catch (error) {
+  } catch (error) {
       console.error(error);
-
-    if (error.name === 'ValidationError') {
-      const errors = Object.values(error.errors).reduce((acc, { properties }) => {
-        acc[properties.path] = properties.message;
-        return acc;
-      }, {});
-      return res.status(400).json({ status: 'fail', message: 'Validation error', errors });
-    }
-
-    res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
+  }
+};
 
   const logout = (req, res) => {
     // Clear the 'authToken' cookie

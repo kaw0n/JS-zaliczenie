@@ -11,7 +11,7 @@ const userRoutes = require('./router/userRoutes');
 const cookieParser = require('cookie-parser');
 
 
-//
+//cookieParser
 app.use(cookieParser());
 
 //middleware
@@ -29,10 +29,9 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true}));
 app.use(morgan('dev'));
-//DB
 
-//}
-  require('dotenv').config()
+//DB
+require('dotenv').config()
 
 
 mongoose.connect("mongodb+srv://"+process.env.DB_USERNAME+":"+process.env.DB_PASSWORD+"@cluster0.idiqxqa.mongodb.net/"+process.env.DB_NAME+"?retryWrites=true&w=majority")
@@ -47,9 +46,7 @@ else{
 app.use(express.static('public'));
 
 
-//user registration
-
-
+//server
 app.listen(3000, () =>{
     console.log("app listening")
 })

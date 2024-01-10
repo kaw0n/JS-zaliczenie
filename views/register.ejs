@@ -14,36 +14,38 @@
 
                 <h1 class="display-4 mb-5">Create a User</h1>
 
-            <form class="mt-3" action="/register" method="POST">
-                <!-- model input-->
-                <div class="form-outline mb-4">
-                    <input type="email" name="email" required>
-                    <label class="form-label" for="email">email</label>
-                </div> 
+                <form class="mt-3" action="/register" method="POST">
+                    <!-- model input-->
+                    <div class="form-outline mb-4">
+                        <input type="email" name="email" id="emailInput" required>
+                        <label class="form-label" for="email">Email</label>
+                    </div> 
+                    
+                    <!-- password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password" id="passwordInput" required>
+                        <label class="form-label" for="password">Password</label>
+                    </div>
                 
-                <!-- rok produkcja input-->
-                <div class="form-outline mb-4">
-                    <input type="password" name="password" required>
-                    <label class="form-label" for="password">hasło</label>
-                </div>
-
-                <!-- desc input-->
-                <!-- confirm password input -->
-                <div class="form-outline mb-4">
-                    <input type="password" name="confirmPassword" required>
-                    <label class="form-label" for="confirmPassword">confirm password</label>
-                </div>
-
+                    <!-- confirm password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" name="confirmPassword" id="confirmPasswordInput" required>
+                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    </div>
+                
+                    
+                    <button type="submit" class="btn btn-primary btn-block" mb-4>Send</button>
+                </form>
+                
                 <script>
                     $('#boay').summernote({
                          placeholder: "Your message goes here",
                          tabsize: 2,
                          height: 200
-                        });
+                    });
+                
                 </script>
 
-                <!--Submit button-->
-                <button type="submit" class="btn btn-primary btn-block" mb-4>Send</button>
             </form>
         </div>
         <%- include('./layouts/footer') -%>

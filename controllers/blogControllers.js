@@ -12,6 +12,8 @@ const blog_create_get =(req, res) => {
 const blog_create_post = async (req, res) => {
     try {
         const { model, productionYear, description } = req.body;
+        
+        const userId = req.body.userId
 
         // Check if an image file was uploaded
         const imageData = req.file ? req.file.buffer : undefined;
@@ -22,6 +24,7 @@ const blog_create_post = async (req, res) => {
             productionYear,
             description,
             imageData,
+            userId,
         });
 
         // Save the new blog post to the database
