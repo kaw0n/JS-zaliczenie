@@ -11,71 +11,106 @@
     <!-- Dodaj linki do plików CSS Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #91bbe0, #536bf3);
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
+       body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #91bbe0, #536bf3);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
 
-        header {
-            background: linear-gradient(to right, #4286f4, #373B44);
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-        }
+header {
+    background: linear-gradient(to right, #4286f4, #373B44);
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+}
 
-        h1, h2, p {
-            color: #fff;
-        }
+h1, h2, p {
+    color: #fff;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
+.row {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie elementów wzdłuż osi X */
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
 
-        .site-description {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
 
-        .left-column, .middle-column, .right-column {
-            width: calc(33.33% - 20px); /* 20px to uwzględni margines między kolumnami */
-            margin-top: 20px;
-        }
+.site-description {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .btn-primary {
-            background-color: #bac4e4;
-            border-color: #8498da;
-        }
+.left-column, .middle-column, .right-column {
+    width: calc(33.33% - 20px); /* 20px to uwzględni margines między kolumnami */
+    margin-top: 20px;
+    position: relative;
+    padding-top: 20px; /* Dodano padding nad zdjęciem */
+}
 
-        .btn-primary:hover {
-            background-color: #bac4e4;
-            border-color: #8498da;
-        }
+.left-column::after, .middle-column::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -10px; /* Dystans między kolumnami */
+    height: 100%;
+    width: 1px;
+    background-color: #fff; /* Białe oddzielenie kolumn */
+}
 
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            margin-bottom: 20px;
-        }
+.right-column::before, .middle-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px; /* Dystans między kolumnami */
+    height: 100%;
+    width: 1px;
+    background-color: #fff; /* Białe oddzielenie kolumn */
+}
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+.btn-primary {
+    background-color: #bac4e4;
+    border-color: #8498da;
+}
+
+.btn-primary:hover {
+    background-color: #bac4e4;
+    border-color: #8498da;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+    width: 100%; /* Ustawienie szerokości karty na 100% */
+    max-width: 300px; /* Maksymalna szerokość karty */
+    text-align: center; /* Wyśrodkowanie tekstu wewnątrz karty */
+    margin-right: 20px; /* Dodany margines między kartami */
+}
+
+.card img {
+    display: block;
+    margin: 0 auto; /* Wyśrodkowanie obrazu w karcie */
+}
+
+
+.card:hover {
+    transform: scale(1.05);
+}
+
 
     </style>
 </head>
@@ -113,19 +148,20 @@
                 <p>Przeglądaj nasze najnowsze oferty samochodowe.</p>
             </section>
         </div>
-        <img src="https://th.bing.com/th/id/OIP.i2v5AqHq257Cu4-oxLDP-QHaEK?w=305&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="img-fluid" alt="Header Image"> <!-- Dodane zdjęcie -->
+        
         <div class="row">
-            <!-- Przykładowa karta oferty samochodowej -->
-            <div class="col-md-4">
-                <div class="card">
-                    <!-- <img src="https://via.placeholder.com/150" class="card-img-top" alt="Samochód"> -->
-                    <div class="card-body">
-                        <h5 class="card-title">Zobacz więcej samochodów</h5>
-                        <p class="card-text">Opis oferty samochodu.</p>
-                        <a href="/post" class="btn btn-primary">Zobacz więcej</a>
-                    </div>
-                </div>
-            </div>
+          <!-- Przykładowa karta oferty samochodowej -->
+          <div class="col-md-4">
+              <div class="card">
+                  <img src="https://th.bing.com/th/id/OIP.i2v5AqHq257Cu4-oxLDP-QHaEK?w=305&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="img-fluid" alt="Header Image">
+                  <div class="card-body">
+                      <h5 class="card-title">Nazwa Samochodu</h5>
+                      <p class="card-text">Opis oferty samochodu.</p>
+                      <a href="#" class="btn btn-primary">Zobacz więcej</a>
+                  </div>
+              </div>
+          </div>
+      </div>
 
             <!-- Dodaj więcej kart ofert samochodowych tutaj -->
         </div>
